@@ -18,11 +18,15 @@ unsigned int array_from_file(int array[],
 }
 
 void array_dump(int a[], unsigned int length) {
-    printf("[ %d", a[0]);
-    for(unsigned int i=1; i<length; i++) {
-        printf(", %d", a[i]);
+    if(length==0) {
+        printf("[]");
+    }else{
+        printf("[%d", a[0]);
+        for(unsigned int i=1; i<length; i++) {
+            printf(", %d", a[i]);
+        }
+        printf("]");
     }
-    printf("]");
 }
 
 bool array_is_sorted(int a[], unsigned int length) {

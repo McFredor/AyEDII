@@ -1,8 +1,10 @@
-/* First, the standard lib includes, alphabetically ordered */
+  /* First, the standard lib includes, alphabetically ordered */
 #include <assert.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+#include "array_helpers.h"
 
 /* Maximum allowed length of the array */
 #define MAX_SIZE 100000
@@ -41,35 +43,11 @@ char *parse_filepath(int argc, char *argv[]) {
     return result;
 }
 
-unsigned int array_from_file(int array[],
-                             unsigned int max_size,
-                             const char *filepath) {
-    
-    FILE *fptr;
-    fptr = fopen(filepath,"r");
-    fscanf(fptr, "%u", &max_size);
-    unsigned int i=0;
-    while(i<max_size){
-        fscanf(fptr, "%d", &array[i]);
-        if(array[i]==EOF){break;}
-        i++;
-    }
-    fclose(fptr);
-    return max_size;
-}
-
-void array_dump(int a[], unsigned int length) {
-    if(length==0) {
-        printf("[]");
-    }else{
-        printf("[ %d", a[0]);
-        for(unsigned int i=1; i<length; i++) {
-            printf(", %d", a[i]);
-        }
-        printf("]");
+void invert_array(int a[], unsigned int length) {
+    for(unsigned int i=0; i< length/2; i++) {
+        array_swap(a, i, (length-1)-i);
     }
 }
-
 
 int main(int argc, char *argv[]) {
     char *filepath = NULL;
@@ -82,9 +60,18 @@ int main(int argc, char *argv[]) {
     
     /* parse the file to fill the array and obtain the actual length */
     unsigned int length = array_from_file(array, MAX_SIZE, filepath);
+
+    /*inverting the array*/
+    invert_array(array, length);    
      
     /*dumping the array*/
     array_dump(array, length);
+
+    if(array_is_sorted(array, length)) {
+        printf("\nEl arreglo está ordenado\n");
+    }else {
+        printf("\nEl arreglo no está ordenado\n");
+    }
     
     return EXIT_SUCCESS;
 }

@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+#include "mybool.h"
+
 unsigned int array_from_file(int array[],
                              unsigned int max_size,
                              const char *filepath) {
@@ -26,4 +28,14 @@ void array_dump(int a[], unsigned int length) {
         }
         printf("]");
     }
+}
+
+mybool array_is_sorted(int a[], unsigned int length) {
+    mybool is_sorted = true;
+    for(unsigned int i=1; i<length; i++) {
+        if(a[i-1] > a[i]) {
+            is_sorted = false;
+        }
+    }
+    return is_sorted;
 }

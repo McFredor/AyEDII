@@ -1,6 +1,7 @@
 #include "array_helpers.h"
 
 #include <stdio.h>
+#include <stdbool.h>
 
 unsigned int array_from_file(int array[],
                              unsigned int max_size,
@@ -26,4 +27,20 @@ void array_dump(int a[], unsigned int length) {
         }
         printf("]");
     }
+}
+
+bool array_is_sorted(int a[], unsigned int length) {
+    bool is_sorted = true;
+    for(unsigned int i=1; i<length; i++) {
+        if(a[i-1] > a[i]) {
+            is_sorted = false;
+        }
+    }
+    return is_sorted;
+}
+
+void array_swap(int a[], unsigned int i, unsigned int j) {
+    int aux = a[i];
+    a[i] = a[j];
+    a[j] = aux;
 }
