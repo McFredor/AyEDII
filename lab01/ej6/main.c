@@ -68,9 +68,9 @@ int main(int argc, char *argv[]) {
     array_dump(array, length);
 
     if(array_is_sorted(array, length)) {
-        printf("\nEl arreglo está ordenado\n");
+        printf("El arreglo está ordenado\n");
     }else {
-        printf("\nEl arreglo no está ordenado\n");
+        printf("El arreglo no está ordenado\n");
     }
     
     return EXIT_SUCCESS;
