@@ -42,6 +42,28 @@ char *parse_filepath(int argc, char *argv[]) {
     return result;
 }
 
+void cp_reset_and_stats(int copy[], int array[], unsigned int length, int sort_method) {
+    /* create a copy of the array */
+    array_copy(copy, array, length);
+
+    /* reset counters and set time */
+    reset_comparisons_counter();
+    reset_swaps_counter();
+    set_current_time();
+
+    /* do the actual sorting */
+         if (sort_method == 1) {selection_sort(copy, length);}
+    else if (sort_method == 2) {insertion_sort(copy, length);}
+    else if (sort_method == 3)     {quick_sort(copy, length);}
+
+    /* show statistics for the sort_method */
+    printf("statistics for ");
+         if (sort_method == 1) {printf("selection_sort\n");}
+    else if (sort_method == 2) {printf("insertion_sort\n");}
+    else if (sort_method == 3) {printf("quick_sort\n");}
+    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
+}
+
 int main(int argc, char *argv[]) {
     char *filepath = NULL;
 
@@ -54,38 +76,20 @@ int main(int argc, char *argv[]) {
     /* parse the file to fill the array and obtain the actual length */
     unsigned int length = array_from_file(array, MAX_SIZE, filepath);
 
-    /* create a copy of the array */
+    /* create a new array for make a copy of 'the array' */
     int copy[MAX_SIZE];
-    array_copy(copy, array, length);
-
-    /* reset counters and set time */
-    reset_comparisons_counter();
-    reset_swaps_counter();
-    set_current_time();
-
-    /* do the actual sorting */
-    selection_sort(copy, length);
-
-    /* show statistics for selection_sort */
-    printf("statistics for selection_sort\n");
-    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
+    
+    /*  create a copy of the array,
+        reset counters and set time,
+        show statistics for the sort_method
+        for selection_sort                  */
+    cp_reset_and_stats(copy, array, length, 1);
 
     /* all the same for insertion_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para insertion_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
-
+    cp_reset_and_stats(copy, array, length, 2);
 
     /* all the same for quick_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para quick_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
+    cp_reset_and_stats(copy, array, length, 3);
 
 
 

@@ -1,1 +1,0 @@
-gcc -Wall -Werror -Wextra -pedantic -std=c99 -o output bounds.c
