@@ -52,13 +52,17 @@ void array_from_file(WeatherTable array, const char *filepath) {
     unsigned int k_month = 0u;
     unsigned int k_day = 0u;
     while (!feof(file)) {
-        int res = fscanf(file, " %u %u %u ", &k_year, &k_month, &k_day);
+        int res = fscanf(file, "%u %u %u ", &k_year, &k_month, &k_day);
         if (res != 3) {
             fprintf(stderr, "Invalid array.\n");
             exit(EXIT_FAILURE);
         }
         Weather weather = weather_from_file(file);
-        /* Completar acá: Guardar la medición de clima en el arreglo multidimensional */
+        unsigned int idx_year = k_year - FST_YEAR;
+        month_t idx_month = k_month - 1u;
+        unsigned int idx_day = k_day - FST_DAY;
+
+        array[idx_year][idx_month][idx_day] = weather;  
     }
     fclose(file);
 }

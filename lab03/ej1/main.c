@@ -22,8 +22,23 @@ int main(void) {
     person_t m = {90, 'M'};
     int a[] = {0, 1, 2, 3};
 
-    /* Completar aquí:
-       Al finalizar la ejecución las variables deben tener los siguientes valores
+    /* Completado aquí: */
+    int correct_nunber[3] = {9, 100, 42};
+    int *pointer[3] = {NULL, NULL, NULL};
+    pointer[0]=&x;
+    pointer[1]=&m.age;
+    pointer[2]=&a[1];
+    
+    char *p2 = NULL;
+    p2 = &m.name_initial;
+    *p2 = 'F';
+    
+    for(int i=0; i<3;i++) {
+      *pointer[i] = correct_nunber[i];
+    } 
+
+    /*
+      Al finalizar la ejecución las variables deben tener los siguientes valores
        x = 9
        m = (100, F)
        a[1] = 42
@@ -34,14 +49,6 @@ int main(void) {
        - Se pueden declarar hasta 2 punteros.
        AYUDA: podes usar GDB para consultares valores de variables y la dirección de memoria donde estan alojadas.
     */
-
-   int *h[3] = {&x, &m.age, &a[1]};
-   int n[3] = {9, 100, 42};
-   for(int i=0; i<3;i++) {
-     *h[i] = n[i];
-   } 
-   char *p2 = &m.name_initial;
-   *p2 = 'F';
 
     printf("x = %d\n", x);
     printf("m = (%d, %c)\n", m.age, m.name_initial);

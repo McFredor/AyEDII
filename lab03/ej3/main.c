@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "pattern_manager.h"
+
 #define MAX_SIZE 1000
 
 static void dump(char a[], unsigned int length) {
@@ -12,7 +14,7 @@ static void dump(char a[], unsigned int length) {
     printf("\n\n");
 }
 
-void print_help(char *program_name) {
+static void print_help(char *program_name) {
     /* Print the usage help of this program. */
     printf("Usage: %s <input file path>\n\n"
            "Sort an array given in a file in disk.\n"
@@ -29,14 +31,31 @@ void print_help(char *program_name) {
            program_name);
 }
 
-//static unsigned int data_from_file(const char *path, unsigned int indexes[], char letters[], unsigned int max_size) {
-//    
-//}
+unsigned int data_from_file(const char *path, unsigned int indexes[], char letters[], unsigned int max_sixe) {
+    /* Parse the filepath given by command line argument. */
+    unsigned int len=0; 
+    FILE *file=NULL;
+    file = fopen(path, "r");
 
-vosort_leters
+    /* parse the file to fill the arrays and obtain the actual length */
+    if (file == NULL) {
+        fprintf(stderr, "File does not exist.\n");
+        exit(EXIT_FAILURE);
+    }
+    for (int res=1; res == 1 && !feof(file); len++) {
+        res = fscanf(file, "%u", &indexes[len]);
+        res = fscanf(file, " -> *%c*\n", &letters[len]);
+        if (max_sixe == len) {
+            fprintf(stderr, "Invalid array.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    fclose(file);
+    return len;
+}
+
 
 int main(int argc, char *argv[]) {
-    FILE *file;
     unsigned int indexes[MAX_SIZE];
     char letters[MAX_SIZE];
     char sorted[MAX_SIZE];
@@ -45,31 +64,21 @@ int main(int argc, char *argv[]) {
     //  :
     // Debe guardarse aqui la cantidad de elementos leidos del archivo
     
+    for(unsigned int i=0; i<MAX_SIZE; i++) {
+        indexes[i]=0;
+        letters[i]='\0';
+        sorted[i]='\0';
+    }
+
     /* Parse the filepath given by command line argument. */
     if (argc < 2) {
         print_help(argv[0]);
         exit(EXIT_FAILURE);
     }
-    file = fopen(argv[1], "r");
+    length = data_from_file(argv[1], indexes, letters, MAX_SIZE);
+    Sort_characters(sorted, indexes, letters, length);
 
-    /* parse the file to fill the arrays and obtain the actual length */
-    if (file == NULL) {
-        fprintf(stderr, "File does not exist.\n");
-        exit(EXIT_FAILURE);
-    }
-    for (int res=1; res == 1; length++) {
-        res = fscanf(file, "%u", &indexes[length]);
-        res = fscanf(file, " -> *%c*\n", &letters[length]);
-        if (MAX_SIZE == length) {
-            fprintf(stderr, "Invalid array.\n");
-            exit(EXIT_FAILURE);
-        }
-    }
-    fclose(file);
-
-    sort_leters
-
-    dump(letters, length);
+    dump(sorted, length);
 
     return EXIT_SUCCESS;
 }

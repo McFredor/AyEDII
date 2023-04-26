@@ -10,6 +10,7 @@
 
 /* Then, this project's includes, alphabetically ordered */
 #include "array_helpers.h"
+#include "weather_utils.h"
 
 /**
  * @brief print usage help
@@ -73,5 +74,26 @@ int main(int argc, char *argv[]) {
     /* show the ordered array in the screen */
     array_dump(array);
 
+    /* show statistics from the array */
+    printf("\n\nThe lowest historical minimum temperature is: %d\n\n", historical_min(array));
+
+    int max_temp_of[YEARS];
+    max_temp_annually(array, max_temp_of);
+    printf("Max temperature of:\n");
+    for(unsigned int year = 0u; year < YEARS; ++year) {
+        int it = max_temp_of[year]/10;
+        printf("    %d is: -> %d,%d Cº\n", year + FST_YEAR, it, max_temp_of[year] - (it*10));
+    }
+
+    month_t max_rf_of[YEARS];
+    char text_months[12][10] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+    max_rainfall_annually(array, max_rf_of);
+    printf("\nThe month with the highest amount of rainfall of:\n");
+    for(unsigned int year = 0u; year < YEARS; ++year) {
+        int idx = max_rf_of[year]; 
+        char *tkm = &text_months[idx][0];
+        printf("    %d is: -> %s\n", year + FST_YEAR, tkm);
+    }
+    
     return (EXIT_SUCCESS);
 }

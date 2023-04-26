@@ -2,15 +2,42 @@
 
 # chmod +x pepe.sh
 
-cd ./lab02/ej5
+cd ./lab03/ej3
 
 #Compilar:
-gcc -Wall -Werror -Wextra -pedantic -std=c99 -g -c array_helpers.c fixstring.c main.c sort.c sort_helpers.c
-gcc -Wall -Werror -Wextra -pedantic -std=c99 -g -no-pie array_helpers.o fixstring.o main.o sort.o sort_helpers.o -o word_sorter
+gcc -Wall -Werror -Wextra -pedantic -std=c99 -c pattern_manager.c main.c
+gcc -Wall -Werror -Wextra -pedantic -std=c99 pattern_manager.o main.o -o mysort
 
 #Probar:
+./mysort ./phrase-basic.in
+sleep 1
+echo ""
+
+./mysort ./phrase-hack.in
+sleep 1
+echo ""
+
+./mysort ./phrase1.in
+sleep 1
+echo ""
+
+./mysort ./phrase2.in
+sleep 1
+echo ""
+
+./mysort ./phrase3.in
+sleep 1
+echo ""
+
+./mysort ./phrase4.in
+sleep 1
+echo ""
+
+
+#> weather_cordoba.out
+#diff ../input/weather_cordoba.in weather_cordoba.out
 
 # Eliminador de archivos generados:
-rm fixstring.o main.o main
+rm helpers.o sort.o main.o
 cd ../..
 
