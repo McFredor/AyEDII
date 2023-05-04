@@ -19,3 +19,5 @@ gcc -Wall -Werror -Wextra -pedantic -std=c99 -g main.o array_helpers.o -o script
 rm main.o
 cd ../..
 
+
+# -cvzf
