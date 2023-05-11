@@ -14,13 +14,11 @@ list empty(void) {
     return l;
 }
 
-list addl(list l, list_elem e) {
-    node *p;
-    p = malloc(sizeof(node));
+void addl(list *l, list_elem e) {
+    node *p = malloc(sizeof(node));
     p->elem = e;
-    p->next = l;
-    l = p;
-    return l;
+    p->next = *l;
+    *l = p;
 }
 
 void destroy(list l) {

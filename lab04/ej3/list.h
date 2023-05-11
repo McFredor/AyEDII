@@ -14,7 +14,7 @@ list empty(void);
     Create a new list with initial value. Allocates new memory.
 */
 
-list addl(list l, list_elem e);
+void addl(list *l, list_elem e);
 /*
     Add the element e in the begin of the list.
 */

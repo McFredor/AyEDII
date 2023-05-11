@@ -2,11 +2,15 @@
 
 # chmod +x pepe.sh
 
-cd ./lab04/ej3
+cd ./lab05/ej1a
 
 #Compilar:
-gcc -Wall -Werror -Wextra -pedantic -std=c99 -g -c list.c array_helpers.c main.c
-gcc -Wall -Werror -Wextra -pedantic -std=c99 -g list.o array_helpers.o main.o -o script
+gcc -Wall -Werror -Wextra -pedantic -std=c99 -c stack.c
+
+cd ./reverse
+
+gcc -Wall -Werror -Wextra -pedantic -std=c99 -g -c array_helpers.c reverse.c
+gcc -Wall -Werror -Wextra -pedantic -std=c99 -g array_helpers.o reverse.o ../stack.o -o script
 
 #Probar:
 ./script ./input/example-unsorted.in
@@ -16,7 +20,7 @@ gcc -Wall -Werror -Wextra -pedantic -std=c99 -g list.o array_helpers.o main.o -o
 #diff ../input/weather_cordoba.in weather_cordoba.out
 
 # Eliminador de archivos generados:
-rm list.o array_helpers.o main.o script
+#rm list.o array_helpers.o main.o script
 cd ../..
 
 

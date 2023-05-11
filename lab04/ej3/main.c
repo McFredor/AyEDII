@@ -54,7 +54,7 @@ list array_to_list(int array[], unsigned int length) {
     list l = empty();
     for (unsigned int i = 0u; i < length; ++i) {
         /* Add element to the list  */
-        l = addl(l, array[length - (i+1)]);
+        addl(&l, array[length - (i+1)]);
     }
     /* Return list */
     return l;
