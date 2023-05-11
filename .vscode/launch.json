@@ -4,12 +4,13 @@
     // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "(gdb) Iniciar",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/lab02/ej0/main",
-            "args": ["input/example-easywords.in"],
+            "program": "${workspaceFolder}/lab04/ej3/script",
+            "args": ["${workspaceFolder}/lab04/ej3/input/example-sorted.in"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
