@@ -32,7 +32,7 @@ stack stack_pop(stack s) {
 }
 
 unsigned int stack_size(stack s) {
-    unsigned int n = 0;
+    unsigned int n = 0u;
     s_stack *p;
     p = s;
     while(p != NULL){

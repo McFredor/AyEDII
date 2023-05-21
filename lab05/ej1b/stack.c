@@ -6,6 +6,7 @@
 typedef struct _s_stack {
     stack_elem elem;
     stack next;
+    unsigned int size;
 } s_stack;
 
 stack stack_empty() {
@@ -18,6 +19,7 @@ stack stack_push(stack s, stack_elem e) {
     p = malloc(sizeof(s_stack));
     p->elem = e;
     p->next = s;
+    p->size = (s==NULL) ? 1u : s->size + 1u;
     s = p;
     return s;
 }
@@ -32,14 +34,9 @@ stack stack_pop(stack s) {
 }
 
 unsigned int stack_size(stack s) {
-    unsigned int n = 0;
-    s_stack *p;
-    p = s;
-    while(p != NULL){
-        n++;
-        p = p->next;
-    }
-    return n;
+    unsigned int l;
+    l = (s==NULL) ? 0 : s->size;
+    return l;
 }
 
 
