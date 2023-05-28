@@ -18,7 +18,7 @@ struct s_node {
 
 static struct s_node *
 create_node(queue_elem e) {
-    struct s_node *new_node=malloc(sizeof(struct s_node));
+    struct s_node *new_node=malloc(sizeof(s ct s_node));
     assert(new_node!=NULL);
     new_node->elem = e;
     new_node->next = NULL;
