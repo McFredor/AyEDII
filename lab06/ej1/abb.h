@@ -1,6 +1,8 @@
 #ifndef _ABB_H
 #define _ABB_H
 
+#define POINT_C // Coment to desactivate the point 'c'.
+
 #include <stdbool.h>
 
 typedef struct _s_abb * abb;

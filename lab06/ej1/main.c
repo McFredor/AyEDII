@@ -5,6 +5,9 @@
 
 #include "abb.h" /* TAD abb */
 
+#define POINT 'a' // 'a' or 'b'. 
+                  // 'c' is in abb.h                 
+
 
 void print_help(char *program_name) {
     /* Print the usage help of this program. */
@@ -59,15 +62,7 @@ abb abb_from_file(const char *filepath) {
     return read_tree;
 }
 
-int main(int argc, char *argv[]) {
-    char *filepath = NULL;
-
-    /* parse the filepath given in command line arguments */
-    filepath = parse_filepath(argc, argv);
-
-    /* parse the file to obtain an abb with the elements */
-    abb tree = abb_from_file(filepath);
-
+static void a(abb tree) {
     /*dumping the tree*/
     abb_dump(tree);
     if (!abb_is_empty(tree)) {
@@ -79,9 +74,13 @@ int main(int argc, char *argv[]) {
         printf("\nÁrbol vacío\n");
     }
 
+    /*destroy the tree*/
     tree = abb_destroy(tree);
+}
+
+static void b(abb tree) {
     /*
-     * Modificar e implementar con un ciclo una interfaz que permita al usuario
+     * Modificado e implementado con un ciclo una interfaz que permita al usuario
      * realizar una de las siguientes operaciones en cada iteración:
      *
      * 1 ........ Mostrar árbol por pantalla
@@ -100,5 +99,85 @@ int main(int argc, char *argv[]) {
      * Al salir debe liberarse toda la memoria utilizada.
      *
      */
+    bool loop = true;
+    int option = 0;
+    while(loop) {
+        if(option < 1 || option > 7) {
+            printf( "\nSe solicitar un número de entrada para realizar una de las acciones:"
+                    "\n    1 ........ Mostrar árbol por pantalla"
+                    "\n    2 ........ Agregar un elemento"
+                    "\n    3 ........ Eliminar un elemento"
+                    "\n    4 ........ Chequear existencia de elemento"
+                    "\n    5 ........ Mostrar longitud del árbol"
+                    "\n    6 ........ Mostrar raiz, máximo y mínimo del árbol"
+                    "\n    7 ........ Salir\n");
+        }
+        printf("\n>>> ");
+        scanf("%d", &option);
+        if(option == 1) {
+            printf("\nMostrar árbol por pantalla...\n");
+            abb_dump(tree);
+            printf("\n");
+        }else
+        if(option == 2) {
+            printf("\nAgregar un elemento...\n");
+            printf("\nSe solicita un número de entrada para agregarlo al arbol: ");
+            int number;
+            scanf("%d", &number);
+            tree = abb_add(tree, number);
+            printf("Se agrego %d al árbol.\n", number);
+        }else
+        if(option == 3) {
+            printf("\nEliminar un elemento...\n");
+            printf("\nSe solicita un número de entrada para eliminarlo del arbol: ");
+            int number;
+            scanf("%d", &number);
+            tree = abb_remove(tree, number);
+            if(abb_exists(tree, number)){printf("Se elimino el %d del árbol.\n", number);}
+            else                        {printf("El %d ya no está en el árbol.\n", number);}
+        }else
+        if(option == 4) {
+            printf("\nChequear existencia de elemento...\n");
+            printf("\nSe solicita un número de entrada para comprobar si existe en el arbol: ");
+            int number;
+            scanf("%d", &number);
+            if(abb_exists(tree, number)) {
+                  printf("El número %d esta en el árbol.\n", number);
+            }else{printf("El número %d NO esta en el árbol.\n", number);}
+        }else
+        if(option == 5) {
+            printf("\nMostrar longitud del árbol...\n");
+            printf("El árbol contine %u elementos.\n", abb_length(tree));
+        }else
+        if(option == 6) {
+            printf("\nMostrar raiz, máximo y mínimo del árbol...\n");
+            if (!abb_is_empty(tree)) {
+                printf("\n");
+                printf("raiz: %d\n minimo: %d\n maximo: %d\n", abb_root(tree),
+                                                               abb_min(tree),
+                                                               abb_max(tree));
+            } else {printf("\nÁrbol vacío\n");}
+        }else
+        if(option == 7) {
+            printf("\nSalir...\n");
+            loop = false;
+        }
+    }
+    tree = abb_destroy(tree);
+}
+
+int main(int argc, char *argv[]) {
+    char *filepath = NULL;
+
+    /* parse the filepath given in command line arguments */
+    filepath = parse_filepath(argc, argv);
+
+    /* parse the file to obtain an abb with the elements */
+    abb tree = abb_from_file(filepath);
+
+    /* select point of the exercise */
+    if      (POINT == 'a') {a(tree);}
+    else if (POINT == 'b') {b(tree);}
+
     return (EXIT_SUCCESS);
 }

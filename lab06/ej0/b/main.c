@@ -54,11 +54,14 @@ int main(int argc, char *argv[]) {
     
     // parse the file and returns the loaded queue
     queue q=queue_from_file(filepath);
-    
+
+    /*Asks the user to choose an item to disscard */
+    q = queue_user_disscard(q);
+
     /*dumping the queue */
-    printf("length: %u\n", queue_size(q));
+    printf("\nlength: %u\n", queue_size(q));
     queue_dump(q, stdout);
-    
+
     queue_destroy(q);
     
     return EXIT_SUCCESS;

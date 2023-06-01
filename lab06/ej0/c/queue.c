@@ -79,8 +79,28 @@ unsigned int queue_size(queue q) {
 
 queue queue_dequeue(queue q) {
     assert(invrep(q) && !queue_is_empty(q));
-    struct s_node * killme=q->first;
+    struct s_node *killme=q->first;
     q->first = q->first->next;
+    killme = destroy_node(killme);
+    q->size -= 1u;
+    assert(invrep(q));
+    return q;
+}
+
+queue queue_disscard(queue q, unsigned int n) {
+    assert(invrep(q) && n < queue_size(q));
+    struct s_node *killme;
+    if(n==0) {
+        killme = q->first;
+        q->first = q->first->next;
+    } else {
+        struct s_node *prev = q->first;
+        for(unsigned int i=1; i<n; i++) {
+            prev = prev->next;
+        }
+        killme = prev->next;
+        prev->next = killme->next;
+    }
     killme = destroy_node(killme);
     q->size -= 1u;
     assert(invrep(q));
