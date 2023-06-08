@@ -12,7 +12,7 @@ string string_create(const char *word) {
     string str = NULL;
     unsigned int len = 0;
     char c = word[0];
-    while(c != '\n'){
+    while(c != '\0'){
         len++;
         c = word[len];
     }

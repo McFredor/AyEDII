@@ -19,10 +19,20 @@ static bool elem_less(abb_elem a, abb_elem b) {
 }
 
 static bool invrep(abb tree) {
-    tree = tree;
-    // if (tree == NULL) 'tree' is an empty tree.
-    // if (tree != NULL) 'tree' is a not-empty tree.
-    return true;
+    bool b = true;
+    if(tree != NULL){
+        if(tree->left != NULL){
+            if(tree->left->elem > tree->elem){
+                b = false;
+            }
+        }
+        if(tree->right != NULL){
+            if(tree->right->elem <= tree->elem){
+                b = false;
+            }
+        }
+    }
+    return b;
 }
 
 abb abb_empty(void) {

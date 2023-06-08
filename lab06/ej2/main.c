@@ -19,13 +19,13 @@ int main(void) {
     for (int i=0; i < N_WORDS; i++) {
         for (int j=0; j < N_WORDS; j++) {
             if (string_eq(words[i], words[j])) {
-                printf("Los strings '%s' y '%s' son iguales\n",
-                        string_ref(words[i]), string_ref(words[j]));
+                printf("Los strings '%s' y '%s' son iguales\n", string_ref(words[i]), string_ref(words[j]));
+            }else{
+            printf("El string '%s' va %s alfabeticamente que '%s'\n\n",
+                                                                        string_ref(words[i]),
+                                                                        string_less(words[i], words[j]) ? "antes": "despues",
+                                                                        string_ref(words[j]));
             }
-            printf("El string '%s' va %s alfabeticamente que '%s'\n\n", 
-            string_ref(words[i]);
-            string_less(words[i], words[j]) ? "antes": "despues",
-                       string_ref(words[j]);
         }
     }
     return EXIT_SUCCESS;

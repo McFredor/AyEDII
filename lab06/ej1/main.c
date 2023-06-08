@@ -5,7 +5,7 @@
 
 #include "abb.h" /* TAD abb */
 
-#define POINT 'a' // 'a' or 'b'. 
+#define POINT 'b' // 'a' or 'b'. 
                   // 'c' is in abb.h                 
 
 
